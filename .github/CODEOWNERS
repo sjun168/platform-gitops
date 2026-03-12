@@ -1,0 +1,6 @@
+# Replace with the platform team handle once the hosted repo/org exists.
+/clusters/prod/** @sjun168
+/applicationsets/** @sjun168
+/projects/** @sjun168
+/platform/root/** @sjun168
+/docs/runbooks/** @sjun168

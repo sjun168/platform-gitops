@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: https://github.com/sjun168/platform-gitops.git
+        revision: main
+        files:
+          - path: clusters/*/apps/*/app.yaml
+  template:
+    metadata:
+      name: '{{ .app.name }}-{{ .app.environment }}'
+      labels:
+        platform.deara.ai/app-name: '{{ .app.name }}'
+        platform.deara.ai/environment: '{{ .app.environment }}'
+    spec:
+      project: apps
+      sources:
+        - repoURL: oci://ghcr.io/sjun168/platform-charts
+          chart: app-template
+          targetRevision: '{{ .app.chartVersion }}'
+          helm:
+            valueFiles:
+              - $values/{{ .app.valuesFile }}
+            parameters:
+              - name: ingress.enabled
+                value: '{{ .app.publicIngress }}'
+              - name: rollout.strategy
+                value: '{{ .app.rolloutStrategy }}'
+        - repoURL: https://github.com/sjun168/platform-gitops.git
+          targetRevision: main
+          ref: values
+        - repoURL: https://github.com/sjun168/platform-gitops.git
+          targetRevision: main
+          path: '{{ .app.addonsPath }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .app.namespace }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
