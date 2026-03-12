@@ -88,10 +88,6 @@ networkPolicy:
           port: 53
         - protocol: TCP
           port: 53
-    - toNamespace: infra
-      toPort: 5432
-    - toNamespace: clawbot
-      toPort: 4000
 
 traceability:
   appCommit: sha-placeholder
