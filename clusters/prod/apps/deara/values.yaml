@@ -1,0 +1,100 @@
+replicaCount: 1
+
+nameOverride: deara
+fullnameOverride: deara
+
+image:
+  repository: ghcr.io/sjun168/deara
+  tag: sha-placeholder
+  pullPolicy: IfNotPresent
+
+container:
+  port: 3000
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: traefik
+  annotations: {}
+  hosts:
+    - host: next.deara.ai
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+env:
+  config: {}
+  secretRefs:
+    - deara-env
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: deara
+
+probes:
+  readiness:
+    httpGet:
+      path: /api/health
+      port: 3000
+  liveness:
+    httpGet:
+      path: /api/health
+      port: 3000
+  startup: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+pdb:
+  enabled: false
+  minAvailable: 1
+
+rollout:
+  strategy: deployment
+
+networkPolicy:
+  enabled: true
+  ingressControllerNamespace: platform
+  ingress:
+    - fromIngressController: true
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    - toNamespace: infra
+      toPort: 5432
+    - toNamespace: clawbot
+      toPort: 4000
+
+traceability:
+  appCommit: sha-placeholder
+  imageTag: sha-placeholder
+  gitopsRevision: pending
+  deployedAt: pending

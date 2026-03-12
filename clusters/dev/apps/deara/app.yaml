@@ -1,0 +1,9 @@
+app:
+  name: deara
+  environment: dev
+  namespace: app-deara-dev
+  chartVersion: 0.1.0
+  valuesFile: clusters/dev/apps/deara/values.yaml
+  addonsPath: clusters/dev/apps/deara/addons
+  publicIngress: true
+  rolloutStrategy: deployment
