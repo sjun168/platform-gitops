@@ -4,3 +4,4 @@ resources:
   - namespace-platform.yaml
   - external-secrets.yaml
   - vault.yaml
+  - vault-auth/vault-tokenreview-binding.yaml

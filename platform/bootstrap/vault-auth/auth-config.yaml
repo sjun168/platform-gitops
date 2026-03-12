@@ -1,0 +1,6 @@
+mountPath: kubernetes
+kubernetesHost: https://kubernetes.default.svc:443
+kubernetesCACertFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+tokenReviewerJWTFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+kvMountPath: kv
+kvVersion: v2

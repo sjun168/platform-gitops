@@ -1,0 +1,9 @@
+name: app-deara-dev
+mountPath: kubernetes
+boundServiceAccountNames:
+  - deara
+boundServiceAccountNamespaces:
+  - app-deara-dev
+policies:
+  - app-deara-dev
+ttl: 1h

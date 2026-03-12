@@ -6,6 +6,15 @@ cluster-local secrets control plane:
 - `platform/bootstrap/external-secrets.yaml`
 - `platform/bootstrap/vault.yaml`
 
+Task 4 cluster rollout paths are checked in under `clusters/`:
+
+- `clusters/dev/kustomization.yaml`
+- `clusters/prod/kustomization.yaml`
+- `clusters/dev/namespaces/kustomization.yaml`
+- `clusters/prod/namespaces/kustomization.yaml`
+- `clusters/dev/apps/deara/addons/kustomization.yaml`
+- `clusters/prod/apps/deara/addons/kustomization.yaml`
+
 The manifests intentionally match the live pilot installation:
 
 - External Secrets Operator chart `2.1.0`
@@ -37,18 +46,19 @@ Manual pilot steps still required after Vault chart sync:
 
 4. Allow Vault to review Kubernetes service account tokens:
 
-   `kubectl create clusterrolebinding vault-tokenreview --clusterrole=system:auth-delegator --serviceaccount=platform:vault`
+   `kubectl apply -k platform/bootstrap/vault-auth`
 
 5. Configure Vault Kubernetes auth inside `vault-0`:
 
+   - checked-in config source: `platform/bootstrap/vault-auth/auth-config.yaml`
    - enable `kv-v2` at `kv`
    - enable the `kubernetes` auth mount
    - configure `auth/kubernetes/config` with the pod service account token and cluster CA
 
 6. Create least-privilege pilot policies and roles:
 
-   - `app-deara-dev` -> `kv/data/dev/app-deara/*`
-   - `app-deara-prod` -> `kv/data/prod/app-deara/*`
+   - checked-in policies: `platform/bootstrap/vault-auth/policies/app-deara-dev.hcl` and `platform/bootstrap/vault-auth/policies/app-deara-prod.hcl`
+   - checked-in roles: `platform/bootstrap/vault-auth/roles/app-deara-dev.yaml` and `platform/bootstrap/vault-auth/roles/app-deara-prod.yaml`
 
 The app `SecretStore` manifests intentionally reference the future Helm-managed `deara`
 service account in each app namespace. They validate against the cluster API now, but they
