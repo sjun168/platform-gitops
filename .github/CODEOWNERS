@@ -1,4 +1,5 @@
 # Replace with the platform team handle once the hosted repo/org exists.
+/.github/** @sjun168
 /clusters/prod/** @sjun168
 /applicationsets/** @sjun168
 /projects/** @sjun168
