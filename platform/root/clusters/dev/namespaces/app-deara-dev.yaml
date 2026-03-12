@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app-deara-dev
+  labels:
+    app.kubernetes.io/name: deara
+    app.kubernetes.io/part-of: platform-pilot
+    platform.deara.ai/environment: dev

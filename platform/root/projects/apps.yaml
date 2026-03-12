@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  description: Business applications managed through platform GitOps.
+  sourceRepos:
+    - https://github.com/sjun168/platform-gitops.git
+    - oci://ghcr.io/sjun168/platform-charts
+  destinations:
+    - namespace: app-*-dev
+      server: https://kubernetes.default.svc
+    - namespace: app-*-prod
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
