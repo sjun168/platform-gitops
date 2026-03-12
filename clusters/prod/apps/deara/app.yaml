@@ -2,7 +2,7 @@ app:
   name: deara
   environment: prod
   namespace: app-deara-prod
-  chartVersion: 0.1.0
+  chartVersion: 0.1.1
   valuesFile: clusters/prod/apps/deara/values.yaml
   addonsPath: clusters/prod/apps/deara/addons
   publicIngress: true
