@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../bootstrap
+  - bootstrap
   - projects/apps.yaml
   - applicationsets/apps.yaml
   - clusters/dev/namespaces/app-deara-dev.yaml

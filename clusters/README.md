@@ -9,6 +9,12 @@
 - `apps/<name>/values.yaml` provides the Helm values consumed through the shared OCI chart.
 - `apps/<name>/addons/` contains GitOps-owned environment overlays such as `SecretStore`, `ExternalSecret`, and `NetworkPolicy`.
 
+## Task 5 baseline state
+
+- Task 5 creates the `AppProject`, `ApplicationSet`, root app, and namespace/bootstrap wiring before any app instance metadata exists under `clusters/*/apps/*/app.yaml`.
+- An empty `clusters/*/apps/*/app.yaml` result is intentional at this revision; generated child Applications begin in Task 6 when the first app metadata files are added.
+- If the `ApplicationSet` exists without child Applications during this stage, treat that as expected sequencing rather than drift.
+
 ## Promotion rules
 
 - Dev updates are expected to flow automatically through GitOps after CI updates the environment values.
