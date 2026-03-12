@@ -7,7 +7,7 @@ spec:
   description: Business applications managed through platform GitOps.
   sourceRepos:
     - https://github.com/sjun168/platform-gitops.git
-    - oci://ghcr.io/sjun168
+    - ghcr.io/sjun168
   destinations:
     - namespace: app-*-dev
       server: https://kubernetes.default.svc
