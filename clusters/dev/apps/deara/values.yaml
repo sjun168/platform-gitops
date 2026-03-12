@@ -5,6 +5,10 @@ image:
   repository: ghcr.io/sjun168/deara
   tag: sha-355a42bb7125bcac20d9c624f836b98a6403fb05
   pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: ghcr-pull-secret
+
 container:
   port: 3000
 service:
