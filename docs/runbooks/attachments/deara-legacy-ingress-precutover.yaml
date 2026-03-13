@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    meta.helm.sh/release-name: deara
+    meta.helm.sh/release-namespace: apps
+  creationTimestamp: "2026-03-12T09:07:41Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: deara
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: deara
+    helm.sh/chart: deara-0.1.0
+  name: deara
+  namespace: apps
+  resourceVersion: "214356"
+  uid: c787c319-eaad-4df8-a177-dd8feda1598c
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: deara.ai
+    http:
+      paths:
+      - backend:
+          service:
+            name: deara
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+  - host: www.deara.ai
+    http:
+      paths:
+      - backend:
+          service:
+            name: deara
+            port:
+              number: 3000
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - ip: 136.243.3.57

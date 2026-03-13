@@ -18,7 +18,11 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.priority: '1000'
   hosts:
-  - host: next.deara.ai
+  - host: deara.ai
+    paths:
+    - path: /
+      pathType: Prefix
+  - host: www.deara.ai
     paths:
     - path: /
       pathType: Prefix
