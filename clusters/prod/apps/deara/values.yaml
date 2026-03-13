@@ -1,52 +1,42 @@
 replicaCount: 1
-
 nameOverride: deara
 fullnameOverride: deara
-
 image:
   repository: ghcr.io/sjun168/deara
-  tag: sha-placeholder
+  tag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
   pullPolicy: IfNotPresent
-
 imagePullSecrets:
-  - name: ghcr-pull-secret
-
+- name: ghcr-pull-secret
 container:
   port: 3000
-
 service:
   type: ClusterIP
   port: 3000
-
 ingress:
   enabled: true
   className: traefik
   annotations:
-    traefik.ingress.kubernetes.io/router.priority: "1000"
+    traefik.ingress.kubernetes.io/router.priority: '1000'
   hosts:
-    - host: next.deara.ai
-      paths:
-        - path: /
-          pathType: Prefix
+  - host: next.deara.ai
+    paths:
+    - path: /
+      pathType: Prefix
   tls: []
-
 env:
   config: {}
   secretRefs:
-    - deara-env
-
+  - deara-env
 resources:
   requests:
     cpu: 100m
     memory: 256Mi
   limits:
     memory: 512Mi
-
 serviceAccount:
   create: true
   annotations: {}
   name: deara
-
 probes:
   readiness:
     tcpSocket:
@@ -55,44 +45,39 @@ probes:
     tcpSocket:
       port: 3000
   startup: {}
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
-
 pdb:
   enabled: false
   minAvailable: 1
-
 rollout:
   strategy: deployment
-
 networkPolicy:
   enabled: true
   ingressControllerNamespace: kube-system
   ingress:
-    - fromIngressController: true
-      ports:
-        - protocol: TCP
-          port: 3000
+  - fromIngressController: true
+    ports:
+    - protocol: TCP
+      port: 3000
   egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-          podSelector:
-            matchLabels:
-              k8s-app: kube-dns
-      ports:
-        - protocol: UDP
-          port: 53
-        - protocol: TCP
-          port: 53
-
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
 traceability:
-  appCommit: sha-placeholder
-  imageTag: sha-placeholder
+  appCommit: 284470b8a40c6f9db24c710444d5c311cfd3922a
+  imageTag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
   gitopsRevision: pending
-  deployedAt: pending
+  deployedAt: '2026-03-13T00:33:25Z'
