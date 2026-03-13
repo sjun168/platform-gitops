@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: aiclaw:networking.k8s.io/Ingress:apps/aiclaw
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"aiclaw:networking.k8s.io/Ingress:apps/aiclaw","traefik.ingress.kubernetes.io/router.entrypoints":"web"},"name":"aiclaw","namespace":"apps"},"spec":{"ingressClassName":"traefik","rules":[{"host":"aiclaw.ai","http":{"paths":[{"backend":{"service":{"name":"aiclaw","port":{"number":3001}}},"path":"/","pathType":"Prefix"}]}}]}}
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+  creationTimestamp: "2026-03-11T09:50:01Z"
+  generation: 1
+  name: aiclaw
+  namespace: apps
+  resourceVersion: "177533"
+  uid: 2cb3dc7f-ca3b-41d5-8f5b-a04a1ed3063c
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: aiclaw.ai
+    http:
+      paths:
+      - backend:
+          service:
+            name: aiclaw
+            port:
+              number: 3001
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - ip: 136.243.3.57
