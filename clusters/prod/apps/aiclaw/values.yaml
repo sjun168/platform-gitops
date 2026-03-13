@@ -3,7 +3,7 @@ nameOverride: aiclaw
 fullnameOverride: aiclaw
 image:
   repository: ghcr.io/sjun168/aiclaw
-  tag: "sha-787d988f1c87ee652fa6c1274bc3da8386388651"
+  tag: "sha-2acb52fafcc545408669672a5b4ae2b976c567a3"
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: ghcr-pull-secret
@@ -16,7 +16,7 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    traefik.ingress.kubernetes.io/router.priority: "1000"
+    traefik.ingress.kubernetes.io/router.priority: '1000'
   hosts:
   - host: next.aiclaw.ai
     paths:
@@ -84,7 +84,7 @@ networkPolicy:
     - protocol: TCP
       port: 5432
 traceability:
-  appCommit: "787d988f1c87ee652fa6c1274bc3da8386388651"
-  imageTag: "sha-787d988f1c87ee652fa6c1274bc3da8386388651"
+  appCommit: "2acb52fafcc545408669672a5b4ae2b976c567a3"
+  imageTag: "sha-2acb52fafcc545408669672a5b4ae2b976c567a3"
   gitopsRevision: pending
-  deployedAt: "2026-03-13T04:28:28Z"
+  deployedAt: "2026-03-13T04:30:30Z"
