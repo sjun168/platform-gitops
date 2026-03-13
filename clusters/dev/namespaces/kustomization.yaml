@@ -2,4 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - app-aiclaw-dev.yaml
+  - app-clawhost-dev.yaml
   - app-deara-dev.yaml

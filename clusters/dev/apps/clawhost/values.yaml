@@ -1,0 +1,59 @@
+server:
+  image:
+    repository: ghcr.io/sjun168/clawhost
+    tag: sha-placeholder
+  replicas: 1
+  port: 18080
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+adminToken: clawhost-admin-deara-2026
+
+postgresql:
+  enabled: false
+
+externalDatabase:
+  host: postgres.infra.svc
+  port: 5432
+  user: postgres
+  password: NEmWqKK2DZhjHYGzCZIEakETD2xz1W8esh1haafUq6NBSWr0xLKTdyKQNGlh5Tud
+  database: clawhost
+  sslmode: disable
+
+kubernetes:
+  namespace: app-clawhost-dev
+
+storage:
+  pvcName: clawhost-shared-data
+  size: 10Gi
+  basePath: /clawhost-data
+
+domain:
+  botDomain: deara.ai
+  apiDomain: api.deara.ai
+
+openclaw:
+  image: ghcr.io/openclaw/openclaw:main
+  gatewayPort: 3000
+  cpuLimit: "2000m"
+  memoryLimit: "4Gi"
+  cpuRequest: "500m"
+  memoryRequest: "1Gi"
+
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+    - host: api.deara.ai
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: "*.deara.ai"
+      paths:
+        - path: /
+          pathType: Prefix
