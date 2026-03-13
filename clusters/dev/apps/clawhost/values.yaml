@@ -1,7 +1,7 @@
 server:
   image:
     repository: ghcr.io/sjun168/clawhost
-    tag: sha-b190c695b36bed68903a4f41c2892b31f48e4d3e
+    tag: sha-4ea8043d57e8886c8fe758a79e49a23a58fc8d79
   replicas: 1
   port: 18080
   resources:
