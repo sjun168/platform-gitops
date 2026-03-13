@@ -10,5 +10,3 @@ resources:
   - clusters/prod/namespaces/app-aiclaw-prod.yaml
   - clusters/prod/namespaces/app-clawhost-prod.yaml
   - clusters/prod/namespaces/app-deara-prod.yaml
-  - applications/clawhost-dev.yaml
-  - applications/clawhost-prod.yaml
