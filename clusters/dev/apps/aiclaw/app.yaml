@@ -1,0 +1,9 @@
+app:
+  name: aiclaw
+  environment: dev
+  namespace: app-aiclaw-dev
+  chartVersion: 0.1.1
+  valuesFile: clusters/dev/apps/aiclaw/values.yaml
+  addonsPath: clusters/dev/apps/aiclaw/addons
+  publicIngress: true
+  rolloutStrategy: deployment

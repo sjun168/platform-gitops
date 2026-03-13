@@ -8,8 +8,12 @@ Files:
 - `vault-tokenreview-binding.yaml` - Kubernetes RBAC required for token review
 - `policies/app-deara-dev.hcl`
 - `policies/app-deara-prod.hcl`
+- `policies/app-aiclaw-dev.hcl`
+- `policies/app-aiclaw-prod.hcl`
 - `roles/app-deara-dev.yaml`
 - `roles/app-deara-prod.yaml`
+- `roles/app-aiclaw-dev.yaml`
+- `roles/app-aiclaw-prod.yaml`
 
 Apply the Kubernetes RBAC declaratively:
 
@@ -30,3 +34,15 @@ Exact role payloads:
 
 - `app-deara-dev` -> service account `deara` in namespace `app-deara-dev`, policy `app-deara-dev`, TTL `1h`
 - `app-deara-prod` -> service account `deara` in namespace `app-deara-prod`, policy `app-deara-prod`, TTL `1h`
+- `app-aiclaw-dev` -> service account `aiclaw` in namespace `app-aiclaw-dev`, policy `app-aiclaw-dev`, TTL `1h`
+- `app-aiclaw-prod` -> service account `aiclaw` in namespace `app-aiclaw-prod`, policy `app-aiclaw-prod`, TTL `1h`
+
+Exact `aiclaw` bootstrap commands:
+
+`vault policy write app-aiclaw-dev platform/bootstrap/vault-auth/policies/app-aiclaw-dev.hcl`
+
+`vault policy write app-aiclaw-prod platform/bootstrap/vault-auth/policies/app-aiclaw-prod.hcl`
+
+`vault write auth/kubernetes/role/app-aiclaw-dev bound_service_account_names=aiclaw bound_service_account_namespaces=app-aiclaw-dev policies=app-aiclaw-dev ttl=1h`
+
+`vault write auth/kubernetes/role/app-aiclaw-prod bound_service_account_names=aiclaw bound_service_account_namespaces=app-aiclaw-prod policies=app-aiclaw-prod ttl=1h`
