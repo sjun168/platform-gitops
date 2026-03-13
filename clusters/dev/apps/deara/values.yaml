@@ -59,7 +59,7 @@ rollout:
   strategy: deployment
 networkPolicy:
   enabled: true
-  ingressControllerNamespace: platform
+  ingressControllerNamespace: kube-system
   ingress:
   - fromIngressController: true
     ports:
