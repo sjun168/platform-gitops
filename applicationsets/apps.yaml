@@ -14,6 +14,8 @@ spec:
   template:
     metadata:
       name: '{{ .app.name }}-{{ .app.environment }}'
+      annotations:
+        kargo.akuity.io/authorized-stage: '{{ .app.name }}:{{ .app.environment }}'
       labels:
         platform.deara.ai/app-name: '{{ .app.name }}'
         platform.deara.ai/environment: '{{ .app.environment }}'
