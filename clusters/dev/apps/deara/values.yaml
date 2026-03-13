@@ -3,7 +3,7 @@ nameOverride: deara
 fullnameOverride: deara
 image:
   repository: ghcr.io/sjun168/deara
-  tag: sha-f8a28a00401d650b806e4923877187262a76eed7
+  tag: sha-3a9ab6081230d6203087f03d2ae91209918fe466
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: ghcr-pull-secret
