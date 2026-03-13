@@ -4,7 +4,7 @@ imagePullSecrets:
 server:
   image:
     repository: ghcr.io/sjun168/clawhost
-    tag: sha-4ea8043d57e8886c8fe758a79e49a23a58fc8d79
+    tag: sha-ae801969ee8a4229aeeff0db81ae0806d1e794b9
   replicas: 1
   port: 18080
   resources:
