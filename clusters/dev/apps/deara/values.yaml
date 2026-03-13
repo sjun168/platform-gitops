@@ -40,12 +40,10 @@ serviceAccount:
   name: deara
 probes:
   readiness:
-    httpGet:
-      path: /api/health
+    tcpSocket:
       port: 3000
   liveness:
-    httpGet:
-      path: /api/health
+    tcpSocket:
       port: 3000
   startup: {}
 autoscaling:
