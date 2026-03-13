@@ -76,6 +76,13 @@ networkPolicy:
       port: 53
     - protocol: TCP
       port: 53
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: infra
+    ports:
+    - protocol: TCP
+      port: 5432
 traceability:
   appCommit: 2acb52fafcc545408669672a5b4ae2b976c567a3
   imageTag: sha-2acb52fafcc545408669672a5b4ae2b976c567a3
