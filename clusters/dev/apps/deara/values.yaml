@@ -3,12 +3,10 @@ nameOverride: deara
 fullnameOverride: deara
 image:
   repository: ghcr.io/sjun168/deara
-  tag: sha-355a42bb7125bcac20d9c624f836b98a6403fb05
+  tag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
   pullPolicy: IfNotPresent
-
 imagePullSecrets:
-  - name: ghcr-pull-secret
-
+- name: ghcr-pull-secret
 container:
   port: 3000
 service:
@@ -18,7 +16,7 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    traefik.ingress.kubernetes.io/router.priority: "1000"
+    traefik.ingress.kubernetes.io/router.priority: '1000'
   hosts:
   - host: dev.deara.ai
     paths:
@@ -79,7 +77,7 @@ networkPolicy:
     - protocol: TCP
       port: 53
 traceability:
-  appCommit: 355a42bb7125bcac20d9c624f836b98a6403fb05
-  imageTag: sha-355a42bb7125bcac20d9c624f836b98a6403fb05
+  appCommit: 284470b8a40c6f9db24c710444d5c311cfd3922a
+  imageTag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
   gitopsRevision: pending
-  deployedAt: '2026-03-12T23:33:29Z'
+  deployedAt: '2026-03-13T00:29:37Z'
