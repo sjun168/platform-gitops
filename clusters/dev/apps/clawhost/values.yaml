@@ -1,3 +1,6 @@
+imagePullSecrets:
+  - name: ghcr-pull-secret
+
 server:
   image:
     repository: ghcr.io/sjun168/clawhost
