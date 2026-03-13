@@ -1,0 +1,83 @@
+replicaCount: 1
+nameOverride: aiclaw
+fullnameOverride: aiclaw
+image:
+  repository: ghcr.io/sjun168/aiclaw
+  tag: sha-2acb52fafcc545408669672a5b4ae2b976c567a3
+  pullPolicy: IfNotPresent
+imagePullSecrets:
+- name: ghcr-pull-secret
+container:
+  port: 3001
+service:
+  type: ClusterIP
+  port: 3001
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    traefik.ingress.kubernetes.io/router.priority: "1000"
+  hosts:
+  - host: next.aiclaw.ai
+    paths:
+    - path: /
+      pathType: Prefix
+  tls: []
+env:
+  config: {}
+  secretRefs:
+  - aiclaw-secrets
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+serviceAccount:
+  create: true
+  annotations: {}
+  name: aiclaw
+probes:
+  readiness:
+    tcpSocket:
+      port: 3001
+  liveness:
+    tcpSocket:
+      port: 3001
+  startup: {}
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+pdb:
+  enabled: false
+  minAvailable: 1
+rollout:
+  strategy: deployment
+networkPolicy:
+  enabled: true
+  ingressControllerNamespace: kube-system
+  ingress:
+  - fromIngressController: true
+    ports:
+    - protocol: TCP
+      port: 3001
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+traceability:
+  appCommit: 2acb52fafcc545408669672a5b4ae2b976c567a3
+  imageTag: sha-2acb52fafcc545408669672a5b4ae2b976c567a3
+  gitopsRevision: pending
+  deployedAt: '2026-03-13T00:00:00Z'

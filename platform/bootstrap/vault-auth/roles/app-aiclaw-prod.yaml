@@ -1,0 +1,9 @@
+name: app-aiclaw-prod
+mountPath: kubernetes
+boundServiceAccountNames:
+  - aiclaw
+boundServiceAccountNamespaces:
+  - app-aiclaw-prod
+policies:
+  - app-aiclaw-prod
+ttl: 1h
