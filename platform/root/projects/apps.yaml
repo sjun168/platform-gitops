@@ -38,3 +38,9 @@ spec:
       kind: NetworkPolicy
     - group: policy
       kind: PodDisruptionBudget
+    - group: rbac.authorization.k8s.io
+      kind: Role
+    - group: rbac.authorization.k8s.io
+      kind: RoleBinding
+    - group: ""
+      kind: PersistentVolumeClaim

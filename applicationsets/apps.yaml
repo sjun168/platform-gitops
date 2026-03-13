@@ -21,7 +21,7 @@ spec:
       project: apps
       sources:
         - repoURL: ghcr.io/sjun168
-          chart: platform-charts/app-template
+          chart: '{{ default "platform-charts/app-template" .app.chartName }}'
           targetRevision: '{{ .app.chartVersion }}'
           helm:
             valueFiles:

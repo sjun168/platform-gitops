@@ -1,0 +1,10 @@
+app:
+  name: clawhost
+  environment: prod
+  namespace: app-clawhost-prod
+  chartName: platform-charts/clawhost
+  chartVersion: 0.1.0
+  valuesFile: clusters/prod/apps/clawhost/values.yaml
+  addonsPath: clusters/prod/apps/clawhost/addons
+  publicIngress: "true"
+  rolloutStrategy: deployment

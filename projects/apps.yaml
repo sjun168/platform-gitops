@@ -7,7 +7,6 @@ spec:
   description: Business applications managed through platform GitOps.
   sourceRepos:
     - https://github.com/sjun168/platform-gitops.git
-    - https://github.com/sjun168/clawhost.git
     - ghcr.io/sjun168
   destinations:
     - namespace: app-*-dev
