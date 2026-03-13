@@ -29,6 +29,7 @@ kubernetes:
   namespace: app-clawhost-prod
 
 storage:
+  enabled: false
   pvcName: clawhost-shared-data
   size: 10Gi
   basePath: /clawhost-data
