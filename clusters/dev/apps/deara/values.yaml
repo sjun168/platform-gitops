@@ -3,7 +3,7 @@ nameOverride: deara
 fullnameOverride: deara
 image:
   repository: ghcr.io/sjun168/deara
-  tag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
+  tag: sha-ca54373fe082265860f33dce469f7dd6a024ece5
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: ghcr-pull-secret
@@ -77,7 +77,7 @@ networkPolicy:
     - protocol: TCP
       port: 53
 traceability:
-  appCommit: 284470b8a40c6f9db24c710444d5c311cfd3922a
-  imageTag: sha-284470b8a40c6f9db24c710444d5c311cfd3922a
+  appCommit: ca54373fe082265860f33dce469f7dd6a024ece5
+  imageTag: sha-ca54373fe082265860f33dce469f7dd6a024ece5
   gitopsRevision: pending
-  deployedAt: '2026-03-13T00:29:37Z'
+  deployedAt: '2026-03-13T01:15:11Z'
