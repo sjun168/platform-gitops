@@ -12,6 +12,17 @@ metadata:
   name: litellm
 ---
 apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: litellm
+  namespace: litellm
+spec:
+  promotionPolicies:
+    - stageSelector:
+        name: prod
+      autoPromotionEnabled: true
+---
+apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
   name: litellm-images
