@@ -3,7 +3,7 @@ nameOverride: aiclaw
 fullnameOverride: aiclaw
 image:
   repository: ghcr.io/sjun168/aiclaw
-  tag: sha-2e408fd016c0b99a6d9c1cc982cd82bdd5d201ce
+  tag: sha-2985074610678d049b4393bc5cc4f56ff83ff6d1
   pullPolicy: IfNotPresent
 imagePullSecrets:
 - name: ghcr-pull-secret
@@ -85,6 +85,6 @@ networkPolicy:
       port: 5432
 traceability:
   appCommit: "787d988f1c87ee652fa6c1274bc3da8386388651"
-  imageTag: sha-2e408fd016c0b99a6d9c1cc982cd82bdd5d201ce
+  imageTag: sha-2985074610678d049b4393bc5cc4f56ff83ff6d1
   gitopsRevision: pending
   deployedAt: "2026-03-13T04:34:29Z"
