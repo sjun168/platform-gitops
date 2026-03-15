@@ -11,6 +11,32 @@ kind: Project
 metadata:
   name: litellm
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ghcr-creds
+  namespace: litellm
+  labels:
+    kargo.akuity.io/cred-type: image
+type: Opaque
+stringData:
+  username: sjun168
+  password: "${GHCR_TOKEN}"
+  repoURL: ghcr.io/sjun168/litellm
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitops-repo-creds
+  namespace: litellm
+  labels:
+    kargo.akuity.io/cred-type: git
+type: Opaque
+stringData:
+  username: sjun168
+  password: "${GHCR_TOKEN}"
+  repoURL: https://github.com/sjun168/platform-gitops.git
+---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: ProjectConfig
 metadata:
@@ -30,10 +56,10 @@ metadata:
 spec:
   subscriptions:
     - image:
-        repoURL: docker.litellm.ai/berriai/litellm
+        repoURL: ghcr.io/sjun168/litellm
         imageSelectionStrategy: NewestBuild
         allowTagsRegexes:
-          - "^main-stable$"
+          - "^sha-.+"
         discoveryLimit: 10
         strictSemvers: false
 ---
@@ -55,7 +81,7 @@ spec:
     spec:
       vars:
         - name: imageRepo
-          value: docker.litellm.ai/berriai/litellm
+          value: ghcr.io/sjun168/litellm
         - name: gitopsRepo
           value: https://github.com/sjun168/platform-gitops.git
       steps:
