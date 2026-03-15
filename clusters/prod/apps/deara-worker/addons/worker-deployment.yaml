@@ -29,6 +29,9 @@ spec:
           image: ghcr.io/sjun168/deara:sha-c9a68869a239db376037e87453efae3f5abb1c24
           imagePullPolicy: IfNotPresent
           command: ["node", "worker.js"]
+          ports:
+            - name: health
+              containerPort: 9090
           envFrom:
             - configMapRef:
                 name: deara-config
@@ -41,6 +44,21 @@ spec:
               value: "true"
             - name: DB_MAX_CONNECTIONS
               value: "1"
+            - name: HEALTH_PORT
+              value: "9090"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 5
+            periodSeconds: 10
           resources:
             requests:
               cpu: 100m

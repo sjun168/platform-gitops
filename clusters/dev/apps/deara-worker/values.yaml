@@ -1,0 +1,7 @@
+replicaCount: 0
+
+ingress:
+  enabled: false
+
+serviceAccount:
+  create: false

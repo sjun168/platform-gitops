@@ -15,7 +15,7 @@ spec:
     metadata:
       name: '{{ .app.name }}-{{ .app.environment }}'
       annotations:
-        kargo.akuity.io/authorized-stage: '{{ .app.name }}:{{ .app.environment }}'
+        kargo.akuity.io/authorized-stage: '{{ default (printf "%s:%s" .app.name .app.environment) .app.kargoAuthorizedStage }}'
       labels:
         platform.deara.ai/app-name: '{{ .app.name }}'
         platform.deara.ai/environment: '{{ .app.environment }}'

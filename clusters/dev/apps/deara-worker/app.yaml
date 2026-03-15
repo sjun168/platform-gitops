@@ -1,0 +1,10 @@
+app:
+  name: deara-worker
+  environment: dev
+  namespace: app-deara-dev
+  chartVersion: 0.1.1
+  valuesFile: clusters/dev/apps/deara-worker/values.yaml
+  addonsPath: clusters/dev/apps/deara-worker/addons
+  publicIngress: false
+  rolloutStrategy: deployment
+  kargoAuthorizedStage: "deara:dev"
