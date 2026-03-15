@@ -4,21 +4,21 @@ metadata:
   name: deara-worker
   namespace: app-deara-prod
   labels:
-    app.kubernetes.io/name: deara
-    app.kubernetes.io/instance: deara-prod
+    app.kubernetes.io/name: deara-worker
+    app.kubernetes.io/instance: deara-worker-prod
     app.kubernetes.io/component: worker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: deara
-      app.kubernetes.io/instance: deara-prod
+      app.kubernetes.io/name: deara-worker
+      app.kubernetes.io/instance: deara-worker-prod
       app.kubernetes.io/component: worker
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: deara
-        app.kubernetes.io/instance: deara-prod
+        app.kubernetes.io/name: deara-worker
+        app.kubernetes.io/instance: deara-worker-prod
         app.kubernetes.io/component: worker
     spec:
       serviceAccountName: deara
