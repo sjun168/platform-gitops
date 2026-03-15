@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: litellm
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+  name: litellm
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: litellm-images
+  namespace: litellm
+spec:
+  subscriptions:
+    - image:
+        repoURL: docker.litellm.ai/berriai/litellm
+        imageSelectionStrategy: NewestBuild
+        allowTagsRegexes:
+          - "^main-stable$"
+        discoveryLimit: 10
+        strictSemvers: false
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: prod
+  namespace: litellm
+  annotations:
+    kargo.akuity.io/color: green
+spec:
+  requestedFreight:
+    - origin:
+        kind: Warehouse
+        name: litellm-images
+      sources:
+        direct: true
+  promotionTemplate:
+    spec:
+      vars:
+        - name: imageRepo
+          value: docker.litellm.ai/berriai/litellm
+        - name: gitopsRepo
+          value: https://github.com/sjun168/platform-gitops.git
+      steps:
+        - uses: git-clone
+          config:
+            repoURL: ${{ vars.gitopsRepo }}
+            checkout:
+              - branch: main
+                path: ./repo
+        - uses: yaml-update
+          config:
+            path: ./repo/clusters/prod/apps/litellm/addons/deployment.yaml
+            updates:
+              - key: spec.template.spec.containers.0.image
+                value: ${{ vars.imageRepo }}@${{ imageFrom(vars.imageRepo).Digest }}
+        - uses: git-commit
+          as: commit
+          config:
+            path: ./repo
+            message: "deploy(litellm/prod): update image to ${{ imageFrom(vars.imageRepo).Digest }}"
+        - uses: git-push
+          config:
+            path: ./repo
+        - uses: argocd-update
+          config:
+            apps:
+              - name: litellm-prod

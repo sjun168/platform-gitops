@@ -1,0 +1,9 @@
+app:
+  name: litellm
+  environment: prod
+  namespace: clawbot
+  chartVersion: 0.1.1
+  valuesFile: clusters/prod/apps/litellm/values.yaml
+  addonsPath: clusters/prod/apps/litellm/addons
+  publicIngress: false
+  rolloutStrategy: deployment
