@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clawhost-api
+  namespace: app-deara-dev
+spec:
+  type: ExternalName
+  externalName: clawhost-dev.app-clawhost-dev.svc.cluster.local
