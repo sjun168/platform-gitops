@@ -6,7 +6,7 @@ image:
   tag: sha-0222a485f3df684b55e0638ff84c8539516bf943
   pullPolicy: IfNotPresent
 imagePullSecrets:
-- name: ghcr-pull-secret
+  - name: ghcr-pull-secret
 container:
   port: 3000
 service:
@@ -16,17 +16,18 @@ ingress:
   enabled: true
   className: traefik
   annotations:
-    traefik.ingress.kubernetes.io/router.priority: '1000'
+    traefik.ingress.kubernetes.io/router.priority: "1000"
   hosts:
-  - host: dev.deara.ai
-    paths:
-    - path: /
-      pathType: Prefix
+    - host: dev.deara.ai
+      paths:
+        - path: /
+          pathType: Prefix
   tls: []
 env:
   config: {}
   secretRefs:
-  - deara-env
+    - deara-env
+    - deara-runtime-overrides
 resources:
   requests:
     cpu: 100m
@@ -59,25 +60,25 @@ networkPolicy:
   enabled: true
   ingressControllerNamespace: kube-system
   ingress:
-  - fromIngressController: true
-    ports:
-    - protocol: TCP
-      port: 3000
+    - fromIngressController: true
+      ports:
+        - protocol: TCP
+          port: 3000
   egress:
-  - to:
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: kube-system
-      podSelector:
-        matchLabels:
-          k8s-app: kube-dns
-    ports:
-    - protocol: UDP
-      port: 53
-    - protocol: TCP
-      port: 53
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
 traceability:
   appCommit: 3a9ab6081230d6203087f03d2ae91209918fe466
   imageTag: sha-0222a485f3df684b55e0638ff84c8539516bf943
   gitopsRevision: pending
-  deployedAt: '2026-03-13T09:15:03Z'
+  deployedAt: "2026-03-13T09:15:03Z"
