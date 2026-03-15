@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: litellm
-          image: docker.litellm.ai/berriai/litellm@sha256:b4eb98902ad234fc418237aff54a42021e2f35ee8d104d6541d31a694197d60d
+          image: docker.litellm.ai/berriai/litellm@sha256:690bcb7a5dd11dffc24d7444a35b28723652443a9ab0608a46c05beba91a2193
           imagePullPolicy: IfNotPresent
           args:
             - --config
