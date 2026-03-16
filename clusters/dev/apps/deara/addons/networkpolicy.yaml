@@ -4,23 +4,14 @@ metadata:
   name: deara-addon-access
   namespace: app-deara-dev
   annotations:
-    platform.deara.ai/temporary-exception: infra/postgres:5432,clawbot/litellm-svc:4000,app-clawhost-dev/clawhost-dev:18080,app-clawhost-dev/deara:3000
+    platform.deara.ai/temporary-exception: infra/postgres:5432,clawbot/litellm-svc:4000,app-clawhost-dev/clawhost-dev:18080
 spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: deara
       app.kubernetes.io/instance: deara-dev
   policyTypes:
-    - Ingress
     - Egress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: app-clawhost-dev
-      ports:
-        - protocol: TCP
-          port: 3000
   egress:
     - to:
         - namespaceSelector:
