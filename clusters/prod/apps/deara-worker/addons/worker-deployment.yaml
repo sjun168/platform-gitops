@@ -26,7 +26,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: worker
-          image: ghcr.io/sjun168/deara:sha-6a388c4e0a7e9f2fa6f8100c7bdb8c4a5c9cf905
+          image: ghcr.io/sjun168/deara:sha-b02fb8cc321a50734f48156c223228d3811bdfba
           imagePullPolicy: IfNotPresent
           command: ["node", "worker.js"]
           ports:
