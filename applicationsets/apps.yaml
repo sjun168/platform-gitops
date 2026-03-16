@@ -13,35 +13,35 @@ spec:
           - path: clusters/*/apps/*/app.yaml
   template:
     metadata:
-      name: '{{ .app.name }}-{{ .app.environment }}'
+      name: "{{ .app.name }}-{{ .app.environment }}"
       annotations:
-        kargo.akuity.io/authorized-stage: '{{ .app.name }}:{{ .app.environment }}'
+        kargo.akuity.io/authorized-stage: "{{ .app.name }}:{{ .app.environment }}"
       labels:
-        platform.deara.ai/app-name: '{{ .app.name }}'
-        platform.deara.ai/environment: '{{ .app.environment }}'
+        platform.deara.ai/app-name: "{{ .app.name }}"
+        platform.deara.ai/environment: "{{ .app.environment }}"
     spec:
       project: apps
       sources:
         - repoURL: ghcr.io/sjun168
           chart: '{{ default "platform-charts/app-template" .app.chartName }}'
-          targetRevision: '{{ .app.chartVersion }}'
+          targetRevision: "{{ .app.chartVersion }}"
           helm:
             valueFiles:
               - $values/{{ .app.valuesFile }}
             parameters:
               - name: ingress.enabled
-                value: '{{ .app.publicIngress }}'
+                value: "{{ .app.publicIngress }}"
               - name: rollout.strategy
-                value: '{{ .app.rolloutStrategy }}'
+                value: "{{ .app.rolloutStrategy }}"
         - repoURL: https://github.com/sjun168/platform-gitops.git
-          targetRevision: main
+          targetRevision: '{{ default "main" .app.gitopsRevision }}'
           ref: values
         - repoURL: https://github.com/sjun168/platform-gitops.git
-          targetRevision: main
-          path: '{{ .app.addonsPath }}'
+          targetRevision: '{{ default "main" .app.gitopsRevision }}'
+          path: "{{ .app.addonsPath }}"
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ .app.namespace }}'
+        namespace: "{{ .app.namespace }}"
       syncPolicy:
         automated:
           prune: true

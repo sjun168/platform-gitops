@@ -1,6 +1,7 @@
 app:
   name: deara
   environment: dev
+  gitopsRevision: dev
   namespace: app-deara-dev
   chartVersion: 0.1.1
   valuesFile: clusters/dev/apps/deara/values.yaml
